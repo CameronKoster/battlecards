@@ -57,18 +57,31 @@ start button? -->
       },
       theirCard() {
         return this.$store.state.theirCard
+      },
+      attack() {
+        return this.$store.state.attack
       }
     },
     mounted() {
 
     },
     methods: {
-      attack(payload) {
+      //check if correct
+      fight(payload) {
+        let myGameDetails = {
+          myGameId: this.$route.params.id,
+          cards: {
+            theirGameId: this.$store.state.game.player.cardId,
+            myGameId: this.$store.state.game.opponent.cardId
+          }
+
+        }
         this.$store.dispatch(payload)
       },
       pickMyCard(card) {
         this.$store.dispatch("pickMyCard", card)
       },
+
       pickTheirCard(card) {
         this.$store.dispatch("pickTheirCard", card)
       },

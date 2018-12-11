@@ -1,20 +1,21 @@
 <template>
-  <div class="theirCards col-12 d-flex">
+  <div class="theirCards col-12 d-flex" v-if="game.opponent">
     <div v-for="card in game.opponent.hand">
-      <!-- <v-if="opponent.visible" class="hideCards"> -->
-      <div @click="theirCard()" class="card bg-light mb-3" style="max-width: 20rem;">
+
+      <div @click="theirCard()" v-if="card.visible" class="card bg-light mb-3" style="max-width: 20rem;">
         <div class="card-body">
 
 
-          <img :src="card.img" height="150" width="150"><!-- v-if="theirCard.visible" -->
-          <!-- <img :src="https://www.bgdf.com/sites/default/files/images/AAAADEnelREAAAAAAM6-JASMALL.preview.jpg" height="250"
-            width="150" v-else-if="!theirCard.visible"> -->
+          <img :src="card.img" height="150" width="150">
 
           <h4 class="card-title">{{card.name}}</h4>
           <h5>ATK: {{card.attack}}</h5>
           <h5>DEF: {{card.defense}}</h5>
           <h5>HEALTH: {{card.health}}</h5>
         </div>
+      </div>
+      <div @click="theirCard()" v-else-if="!card.visible" class="card bg-light mb-3" style="max-width: 20rem;">
+        <img src="../assets/robot-cards.jpg" height="250" width="150">
       </div>
     </div>
   </div>

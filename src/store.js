@@ -17,7 +17,8 @@ export default new Vuex.Store({
   state: {
     game: {},
     myCard: {},
-    theirCard: {}
+    theirCard: {},
+    attack: {}
   },
   mutations: {
     SETGAME(state, gameData) {
@@ -29,6 +30,9 @@ export default new Vuex.Store({
     SETTHEIRCARD(state, card) {
       state.theirCard = card
     },
+    SETATTACK(state, payload) {
+      state.attack = payload
+    }
   },
   actions: {
     startGame({ commit }) {
@@ -48,7 +52,13 @@ export default new Vuex.Store({
       commit("SETTHEIRCARD", card)
     },
     attack({ commit }, payload) {
-
+      cardAPI.put("/:gameId")
+        .then(res => {
+          commit("SETATTACK", res.data.game)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 })
